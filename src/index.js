@@ -1,3 +1,4 @@
 import './css/styles.css';
-
-const DEBOUNCE_DELAY = 300;
+import './css/markup-card.css';
+import './css/markup-list.css';
+import './js/main.js';

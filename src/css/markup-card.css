@@ -1,0 +1,25 @@
+.country-info__head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.country-info__name {
+  margin-left: 20px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.country-info__item {
+  font-size: 22px;
+}
+
+.country-info__item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.country-info__item span {
+  font-weight: 700;
+  margin-right: 10px;
+}
