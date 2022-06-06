@@ -20,10 +20,22 @@ function onSearch({ target: { value } }) {
   }
 
   fetchCountries(trimmedValue)
-    .then(response => response.json())
+    .then(responseHandler)
     .then(render)
     .catch(errorHandler)
     .finally(toggleLoader);
+}
+
+function responseHandler(response) {
+  if (!response.ok) {
+    throw new Error(response.status);
+  }
+
+  return response.json();
+}
+
+function errorHandler(error) {
+  Notify.failure('Oops, there is no country with that name');
 }
 
 function render(countries) {
@@ -54,10 +66,6 @@ function onCountryListRendered(countries) {
 
     items.forEach(item => item.removeEventListener('click', onCountryItem));
   }
-}
-
-function errorHandler(error) {
-  Notify.failure('Oops, there is no country with that name');
 }
 
 function clearMarkup() {
