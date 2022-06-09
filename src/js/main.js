@@ -20,18 +20,9 @@ function onSearch({ target: { value } }) {
   }
 
   fetchCountries(trimmedValue)
-    .then(responseHandler)
     .then(render)
     .catch(errorHandler)
     .finally(toggleLoader);
-}
-
-function responseHandler(response) {
-  if (!response.ok) {
-    throw new Error(response.status);
-  }
-
-  return response.json();
 }
 
 function errorHandler(error) {
