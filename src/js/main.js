@@ -9,7 +9,7 @@ const DEBOUNCE_DELAY = 300;
 
 refs.searhBox.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
-function onSearch({ target: { value } }) {
+async function onSearch({ target: { value } }) {
   const trimmedValue = value.trim();
   clearMarkup();
   toggleLoader();
@@ -19,13 +19,19 @@ function onSearch({ target: { value } }) {
     return;
   }
 
-  fetchCountries(trimmedValue)
-    .then(render)
-    .catch(errorHandler)
-    .finally(toggleLoader);
+  try {
+    const countries = await fetchCountries(trimmedValue);
+
+    render(countries);
+  } catch (error) {
+    errorHandler(error);
+  }
+
+  toggleLoader();
 }
 
 function errorHandler(error) {
+  console.log(error);
   Notify.failure('Oops, there is no country with that name');
 }
 

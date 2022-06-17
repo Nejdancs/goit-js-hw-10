@@ -3,12 +3,12 @@ const searchParams = new URLSearchParams({
   fields: 'name,capital,population,flags,languages',
 });
 
-export function fetchCountries(name) {
-  return fetch(`${API_URL}${name}?${searchParams}`).then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
+export async function fetchCountries(name) {
+  const response = await fetch(`${API_URL}${name}?${searchParams}`);
+  if (!response.ok) {
+    throw new Error(response.status);
+  }
+  const data = await response.json();
 
-    return response.json();
-  });
+  return data;
 }
